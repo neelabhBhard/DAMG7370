@@ -7,7 +7,8 @@
 		},
 		"parameters": {
 			"File_Name": {
-				"type": "string"
+				"type": "string",
+				"defaultValue": "pet_lic_parquet"
 			}
 		},
 		"annotations": [],
