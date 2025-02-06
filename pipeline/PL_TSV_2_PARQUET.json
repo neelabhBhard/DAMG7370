@@ -24,6 +24,22 @@
 				"typeProperties": {
 					"source": {
 						"type": "ParquetSource",
+						"additionalColumns": [
+							{
+								"name": " di_job_id",
+								"value": {
+									"value": "@pipeline().RunId",
+									"type": "Expression"
+								}
+							},
+							{
+								"name": " di_load_dt",
+								"value": {
+									"value": "@utcNow()",
+									"type": "Expression"
+								}
+							}
+						],
 						"storeSettings": {
 							"type": "AzureBlobFSReadSettings",
 							"recursive": false,
@@ -44,7 +60,8 @@
 						"linkedServiceName": {
 							"referenceName": "AzureBlobStorage1",
 							"type": "LinkedServiceReference"
-						}
+						},
+						"path": ""
 					}
 				},
 				"inputs": [
@@ -61,7 +78,7 @@
 				],
 				"outputs": [
 					{
-						"referenceName": "SnowflakeTable1",
+						"referenceName": "SnowflakeTable2",
 						"type": "DatasetReference"
 					}
 				]
