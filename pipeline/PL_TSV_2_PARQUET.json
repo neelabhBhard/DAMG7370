@@ -64,18 +64,6 @@
 						"path": ""
 					}
 				},
-				"inputs": [
-					{
-						"referenceName": "Parquet1",
-						"type": "DatasetReference",
-						"parameters": {
-							"File_Name": {
-								"value": "@variables('myFileName')",
-								"type": "Expression"
-							}
-						}
-					}
-				],
 				"outputs": [
 					{
 						"referenceName": "SnowflakeTable2",
@@ -116,34 +104,8 @@
 							"type": "ParquetWriteSettings"
 						}
 					},
-					"enableStaging": false,
-					"translator": {
-						"type": "TabularTranslator",
-						"typeConversion": true,
-						"typeConversionSettings": {
-							"allowDataTruncation": true,
-							"treatBooleanAsNumber": false
-						}
-					}
-				},
-				"inputs": [
-					{
-						"referenceName": "DelimitedText5",
-						"type": "DatasetReference"
-					}
-				],
-				"outputs": [
-					{
-						"referenceName": "Parquet1",
-						"type": "DatasetReference",
-						"parameters": {
-							"File_Name": {
-								"value": "@variables('myFileName')",
-								"type": "Expression"
-							}
-						}
-					}
-				]
+					"enableStaging": false
+				}
 			},
 			{
 				"name": "Lookup_Max__SK",
@@ -172,10 +134,6 @@
 						"exportSettings": {
 							"type": "SnowflakeExportCopyCommand"
 						}
-					},
-					"dataset": {
-						"referenceName": "SnowflakeTable1",
-						"type": "DatasetReference"
 					}
 				}
 			},
