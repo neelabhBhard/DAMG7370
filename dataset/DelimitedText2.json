@@ -12,7 +12,7 @@
 			},
 			"Filename": {
 				"type": "string",
-				"defaultValue": "Seattle_Pet_License.tsv"
+				"defaultValue": "Seattle_Pet_Licenses_new.tsv"
 			},
 			"FileDilemter": {
 				"type": "string",
