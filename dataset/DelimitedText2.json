@@ -6,16 +6,17 @@
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"FileName": {
+			"Directory": {
 				"type": "string",
-				"defaultValue": "test.txt"
+				"defaultValue": "na"
 			},
-			"FileDelimeter": {
+			"Filename": {
 				"type": "string",
 				"defaultValue": "Seattle_Pet_License.tsv"
 			},
-			"Delimiter": {
-				"type": "string"
+			"FileDilemter": {
+				"type": "string",
+				"defaultValue": "\\t"
 			}
 		},
 		"annotations": [],
@@ -29,10 +30,7 @@
 				},
 				"fileSystem": "bronze"
 			},
-			"columnDelimiter": {
-				"value": "@dataset().FileDelimeter",
-				"type": "Expression"
-			},
+			"columnDelimiter": "\t",
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
