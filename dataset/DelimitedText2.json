@@ -25,12 +25,15 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": {
-					"value": "@dataset().FileName",
+					"value": "@dataset().Filename",
 					"type": "Expression"
 				},
 				"fileSystem": "bronze"
 			},
-			"columnDelimiter": "\t",
+			"columnDelimiter": {
+				"value": "@dataset().FileDilemter",
+				"type": "Expression"
+			},
 			"escapeChar": "\\",
 			"firstRowAsHeader": true,
 			"quoteChar": "\""
