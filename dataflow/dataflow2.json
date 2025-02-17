@@ -1,0 +1,45 @@
+{
+	"name": "dataflow2",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTable3",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTable4",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          LIC_ISSUE_DATE as date,",
+				"          SECONDARY_BREED as string,",
+				"          ZIP_CODE as string,",
+				"          SPECIES as string,",
+				"          LICENSE_NUMBER as string,",
+				"          ANIMAL_NAME as string,",
+				"          JOB_EXC_ID as string,",
+				"          JOB_EXC_DT as date,",
+				"          PRIMARY_BREED as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> source1",
+				"source(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> source2"
+			]
+		}
+	}
+}
