@@ -7,7 +7,44 @@
 		},
 		"annotations": [],
 		"type": "SnowflakeV2Table",
-		"schema": [],
+		"schema": [
+			{
+				"name": "LIC_ISSUE_DATE",
+				"type": "DATE"
+			},
+			{
+				"name": "SECONDARY_BREED",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "ZIP_CODE",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SPECIES",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "LICENSE_NUMBER",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "ANIMAL_NAME",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "JOB_EXC_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "JOB_EXC_DT",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "PRIMARY_BREED",
+				"type": "DATE"
+			}
+		],
 		"typeProperties": {
 			"schema": "TEMP_SCHEMA",
 			"table": "V2_PET_LICENSE_STAGE"
