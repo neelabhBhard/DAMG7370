@@ -2,15 +2,15 @@
 	"name": "SnowflakeTable2",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Snowflake1",
+			"referenceName": "Snowflake2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "SnowflakeV2Table",
 		"schema": [],
 		"typeProperties": {
-			"schema": "NYPD_CRIME_SCHEMA",
-			"table": "NYPD_CRIME_STAGE"
+			"schema": "TEMP_SCHEMA",
+			"table": "BREED_DIM"
 		}
 	}
 }
