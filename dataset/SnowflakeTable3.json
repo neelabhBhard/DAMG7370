@@ -47,7 +47,7 @@
 		],
 		"typeProperties": {
 			"schema": "TEMP_SCHEMA",
-			"table": "BREED_DIM"
+			"table": "V2_PET_LICENSE_STAGE"
 		}
 	}
 }
