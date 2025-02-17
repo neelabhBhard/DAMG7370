@@ -53,6 +53,9 @@
 				},
 				{
 					"name": "CrossJoin"
+				},
+				{
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -137,7 +140,17 @@
 				"     joinType:'cross',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> CrossJoin"
+				"     broadcast: 'auto')~> CrossJoin",
+				"CrossJoin select(mapColumn(",
+				"          JOB_EXC_ID,",
+				"          JOB_EXC_DT,",
+				"          LOCATION_SK,",
+				"          BREED_SK,",
+				"          DATE_DIM_SK,",
+				"          PET_LIC_SK = MAXPETSK",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1"
 			]
 		}
 	}
