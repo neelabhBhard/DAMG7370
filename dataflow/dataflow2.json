@@ -50,6 +50,12 @@
 				},
 				{
 					"name": "joiningDate"
+				},
+				{
+					"name": "CrossJoin"
+				},
+				{
+					"name": "SurrogateKeyfct"
 				}
 			],
 			"scriptLines": [
@@ -129,7 +135,15 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> joiningDate"
+				"     broadcast: 'auto')~> joiningDate",
+				"joiningDate, MAXPETSK join(1==1,",
+				"     joinType:'cross',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> CrossJoin",
+				"CrossJoin keyGenerate(output(RowNum1 as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> SurrogateKeyfct"
 			]
 		}
 	}
