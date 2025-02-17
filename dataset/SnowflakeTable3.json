@@ -2,7 +2,7 @@
 	"name": "SnowflakeTable3",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Snowflake3",
+			"referenceName": "Snowflake4",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -47,7 +47,7 @@
 		],
 		"typeProperties": {
 			"schema": "TEMP_SCHEMA",
-			"table": "V2_PET_LICENSE_STAGE"
+			"table": "BREED_DIM"
 		}
 	}
 }
