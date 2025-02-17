@@ -82,7 +82,7 @@
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey",
 				"surrogateKey derive(BREED_SK = MAXBREEDSK + RowNum,",
-				"          DI_CREATED_DT = toString(currentDate(), 'yyyy-MM-dd'),",
+				"          DI_CREATED_DT = currentDate(),",
 				"          DI_JOB_ID = $DI_JOB_ID) ~> DerivedColumns",
 				"DerivedColumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
