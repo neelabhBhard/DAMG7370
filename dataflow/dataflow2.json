@@ -43,22 +43,25 @@
 			"sinks": [],
 			"transformations": [
 				{
-					"name": "joininngBreedandV2"
+					"name": "JoiningLocation"
 				},
 				{
-					"name": "join1"
+					"name": "joinbreed"
+				},
+				{
+					"name": "joiningDate"
 				}
 			],
 			"scriptLines": [
 				"source(output(",
-				"          LIC_ISSUE_DATE as string,",
+				"          LIC_ISSUE_DATE as date,",
 				"          SECONDARY_BREED as string,",
 				"          ZIP_CODE as string,",
 				"          SPECIES as string,",
 				"          LICENSE_NUMBER as string,",
 				"          ANIMAL_NAME as string,",
 				"          JOB_EXC_ID as string,",
-				"          JOB_EXC_DT as string,",
+				"          JOB_EXC_DT as date,",
 				"          PRIMARY_BREED as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
@@ -114,14 +117,19 @@
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> joininngBreedandV2",
-				"joininngBreedandV2, BREEDDIM join(V2STAGEPETLIC@PRIMARY_BREED == BREEDDIM@PRIMARY_BREED",
-				"     && V2STAGEPETLIC@SECONDARY_BREED == BREEDDIM@SECONDARY_BREED",
+				"     broadcast: 'auto')~> JoiningLocation",
+				"JoiningLocation, BREEDDIM join(V2STAGEPETLIC@SECONDARY_BREED == BREEDDIM@SECONDARY_BREED",
+				"     && V2STAGEPETLIC@PRIMARY_BREED == BREEDDIM@PRIMARY_BREED",
 				"     && V2STAGEPETLIC@SPECIES == BREEDDIM@SPECIES,",
 				"     joinType:'inner',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1"
+				"     broadcast: 'auto')~> joinbreed",
+				"joinbreed, DATEDIM join(LIC_ISSUE_DATE == DT,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joiningDate"
 			]
 		}
 	}
