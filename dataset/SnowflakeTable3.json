@@ -2,7 +2,7 @@
 	"name": "SnowflakeTable3",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "IMPORTING_STAGE_DATA",
+			"referenceName": "Snowflake3",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
@@ -47,7 +47,7 @@
 		],
 		"typeProperties": {
 			"schema": "TEMP_SCHEMA",
-			"table": "BREED_DIM"
+			"table": "V2_PET_LICENSE_STAGE"
 		}
 	}
 }
