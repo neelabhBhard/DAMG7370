@@ -25,7 +25,7 @@
 						"referenceName": "SnowflakeTable3",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "sinkBreedDim"
 				}
 			],
 			"transformations": [
@@ -81,7 +81,7 @@
 				"aggregateBreedKeys keyGenerate(output(RowNum as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey",
-				"surrogateKey derive(BREED_SAK = MAXBREEDSK + RowNum,",
+				"surrogateKey derive(BREED_SK = MAXBREEDSK + RowNum,",
 				"          DI_CREATED_DT = toString(currentDate(), 'yyyy-MM-dd'),",
 				"          DI_JOB_ID = $DI_JOB_ID) ~> DerivedColumns",
 				"DerivedColumns sink(allowSchemaDrift: true,",
@@ -103,8 +103,12 @@
 				"     upsertable:false,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     stageInsert: true) ~> sink1"
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          SECONDARY_BREED,",
+				"          SPECIES,",
+				"          PRIMARY_BREED",
+				"     )) ~> sinkBreedDim"
 			]
 		}
 	}
