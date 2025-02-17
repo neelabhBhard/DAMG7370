@@ -22,7 +22,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable2",
+						"referenceName": "BREED_DIM_IMPORT",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
