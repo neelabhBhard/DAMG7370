@@ -9,14 +9,21 @@
 						"referenceName": "SnowflakeTable3",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "V2STAGEPETLIC"
 				},
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable4",
+						"referenceName": "SnowflakeTable8",
 						"type": "DatasetReference"
 					},
-					"name": "source2"
+					"name": "LOCATIONDIM"
+				},
+				{
+					"dataset": {
+						"referenceName": "BREED_DIM_IMPORT",
+						"type": "DatasetReference"
+					},
+					"name": "BREEDDIM"
 				}
 			],
 			"sinks": [],
@@ -35,10 +42,21 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> source1",
+				"     format: 'table') ~> V2STAGEPETLIC",
+				"source(output(",
+				"          LOCATION_SK as decimal(10,0),",
+				"          CITY as string,",
+				"          STATE as string,",
+				"          ZIP as string,",
+				"          DI_JOB_ID as string,",
+				"          DI_CREATED_DT as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> LOCATIONDIM",
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> source2"
+				"     format: 'table') ~> BREEDDIM"
 			]
 		}
 	}
