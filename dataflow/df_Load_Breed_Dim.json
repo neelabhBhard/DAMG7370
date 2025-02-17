@@ -36,6 +36,9 @@
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     DI_JOB_ID as string (\"59\")",
+				"}",
 				"source(output(",
 				"          LIC_ISSUE_DATE as string,",
 				"          SECONDARY_BREED as string,",
@@ -70,7 +73,9 @@
 				"aggregateBreedKeys keyGenerate(output(RowNum as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey",
-				"surrogateKey derive() ~> DerivedColumns"
+				"surrogateKey derive(BREED_SAK = MAXBREEDSK + RowNum,",
+				"          DI_CREATED_DT = toString(currentDate(), 'yyyy-MM-dd'),",
+				"          DI_JOB_ID = $DI_JOB_ID) ~> DerivedColumns"
 			]
 		}
 	}
