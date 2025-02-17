@@ -37,11 +37,18 @@
 						"referenceName": "DATE_DIM_IMPORT",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "DATEDIM"
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "joininngBreedandV2"
+				},
+				{
+					"name": "join1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          LIC_ISSUE_DATE as date,",
@@ -102,7 +109,17 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> source1"
+				"     format: 'table') ~> DATEDIM",
+				"V2STAGEPETLIC, LOCATIONDIM join(ZIP_CODE == ZIP,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> joininngBreedandV2",
+				"joininngBreedandV2 join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
 			]
 		}
 	}
