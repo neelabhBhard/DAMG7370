@@ -221,7 +221,10 @@
 				"inputs": [
 					{
 						"referenceName": "DelimitedText3",
-						"type": "DatasetReference"
+						"type": "DatasetReference",
+						"parameters": {
+							"Filename": "Seattle_Pet_Licenses_new"
+						}
 					}
 				],
 				"outputs": [
