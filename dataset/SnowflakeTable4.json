@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "TEMP_SCHEMA",
-			"table": "BREED_DIM"
+			"table": "PET_LICENSE_STAGE"
 		}
 	}
 }
