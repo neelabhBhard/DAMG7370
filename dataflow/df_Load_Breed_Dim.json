@@ -23,6 +23,16 @@
 			"transformations": [
 				{
 					"name": "join1"
+				},
+				{
+					"name": "aggregateBreedKeys",
+					"description": "Aggregating data by 'Species, Primary_Breed, Secondary_Breed, MAXBREEDSK' producing columns"
+				},
+				{
+					"name": "surrogateKey"
+				},
+				{
+					"name": "DerivedColumns"
 				}
 			],
 			"scriptLines": [
@@ -51,7 +61,16 @@
 				"     joinType:'cross',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1"
+				"     broadcast: 'auto')~> join1",
+				"join1 aggregate(groupBy(SPECIES,",
+				"          PRIMARY_BREED,",
+				"          SECONDARY_BREED,",
+				"          MAXBREEDSK),",
+				"     CountRow = count({LICENSE_NUMBER})) ~> aggregateBreedKeys",
+				"aggregateBreedKeys keyGenerate(output(RowNum as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey",
+				"surrogateKey derive() ~> DerivedColumns"
 			]
 		}
 	}
