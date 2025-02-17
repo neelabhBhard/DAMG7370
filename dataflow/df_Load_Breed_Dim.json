@@ -20,38 +20,38 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "join1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
-				"          BREED_SK as decimal(10,0),",
-				"          START_DT as date,",
-				"          END_DT as date,",
-				"          IS_CURRENT as decimal(10,0),",
-				"          BREED_DK as decimal(10,0),",
-				"          SPECIES_NAME as string,",
-				"          PRIMARY_BREED_NAME as string,",
-				"          SECONDARY_BREED_NAME as string,",
-				"          DI_JOB_ID as string,",
-				"          DI_LOAD_AT as date",
+				"          LIC_ISSUE_DATE as string,",
+				"          SECONDARY_BREED as string,",
+				"          ZIP_CODE as string,",
+				"          SPECIES as string,",
+				"          LICENSE_NUMBER as string,",
+				"          ANIMAL_NAME as string,",
+				"          JOB_EXC_ID as string,",
+				"          JOB_EXC_DT as string,",
+				"          PRIMARY_BREED as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table') ~> sourceStage",
 				"source(output(",
-				"          BREED_SK as decimal(10,0),",
-				"          START_DT as date,",
-				"          END_DT as date,",
-				"          IS_CURRENT as decimal(10,0),",
-				"          BREED_DK as decimal(10,0),",
-				"          SPECIES_NAME as string,",
-				"          PRIMARY_BREED_NAME as string,",
-				"          SECONDARY_BREED_NAME as string,",
-				"          DI_JOB_ID as string,",
-				"          DI_LOAD_AT as date",
+				"          MAXBREEDSK as decimal(10,0)",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> SourceBreedDim"
+				"     query: 'SELECT NVL(MAX(BREED_SK),0) as MaxBreedSK FROM TEMP_SCHEMA.BREED_DIM',",
+				"     format: 'query') ~> SourceBreedDim",
+				"sourceStage, SourceBreedDim join(1==1,",
+				"     joinType:'cross',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
 			]
 		}
 	}
