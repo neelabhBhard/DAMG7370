@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable3",
+						"referenceName": "SnowflakeTable5",
 						"type": "DatasetReference"
 					},
 					"name": "V2STAGEPETLIC"
@@ -51,14 +51,14 @@
 			],
 			"scriptLines": [
 				"source(output(",
-				"          LIC_ISSUE_DATE as date,",
+				"          LIC_ISSUE_DATE as string,",
 				"          SECONDARY_BREED as string,",
 				"          ZIP_CODE as string,",
 				"          SPECIES as string,",
 				"          LICENSE_NUMBER as string,",
 				"          ANIMAL_NAME as string,",
 				"          JOB_EXC_ID as string,",
-				"          JOB_EXC_DT as date,",
+				"          JOB_EXC_DT as string,",
 				"          PRIMARY_BREED as string",
 				"     ),",
 				"     allowSchemaDrift: true,",
