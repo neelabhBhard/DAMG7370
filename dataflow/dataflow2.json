@@ -24,6 +24,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "BREEDDIM"
+				},
+				{
+					"dataset": {
+						"referenceName": "FCT_TABLE_IMPORT",
+						"type": "DatasetReference"
+					},
+					"name": "MAXPETSK"
 				}
 			],
 			"sinks": [],
@@ -54,9 +61,24 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table') ~> LOCATIONDIM",
-				"source(allowSchemaDrift: true,",
+				"source(output(",
+				"          BREED_SK as decimal(38,0),",
+				"          SPECIES as string,",
+				"          PRIMARY_BREED as string,",
+				"          SECONDARY_BREED as string,",
+				"          DI_JOB_ID as string,",
+				"          DI_CREATED_DT as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> BREEDDIM"
+				"     format: 'table') ~> BREEDDIM",
+				"source(output(",
+				"          MAXPETSK as decimal(10,0)",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     query: 'SELECT NVL(MAX(PET_LIC_SK),0) as MaxpetSK FROM TEMP_SCHEMA.PET_LIC_FCT',",
+				"     format: 'query') ~> MAXPETSK"
 			]
 		}
 	}
