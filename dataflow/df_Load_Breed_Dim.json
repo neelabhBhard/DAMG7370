@@ -22,7 +22,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable3",
+						"referenceName": "SnowflakeTable2",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -86,22 +86,13 @@
 				"          DI_JOB_ID = $DI_JOB_ID) ~> DerivedColumns",
 				"DerivedColumns sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     input(",
-				"          LIC_ISSUE_DATE as string,",
-				"          SECONDARY_BREED as string,",
-				"          ZIP_CODE as string,",
-				"          SPECIES as string,",
-				"          LICENSE_NUMBER as string,",
-				"          ANIMAL_NAME as string,",
-				"          JOB_EXC_ID as string,",
-				"          JOB_EXC_DT as string,",
-				"          PRIMARY_BREED as string",
-				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
 				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
 				"     stageInsert: true,",
 				"     mapColumn(",
 				"          SPECIES,",
