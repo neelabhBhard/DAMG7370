@@ -1,0 +1,58 @@
+{
+	"name": "df_Load_Breed_Dim",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTable3",
+						"type": "DatasetReference"
+					},
+					"name": "sourceStage"
+				},
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTable3",
+						"type": "DatasetReference"
+					},
+					"name": "SourceBreedDim"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          BREED_SK as decimal(10,0),",
+				"          START_DT as date,",
+				"          END_DT as date,",
+				"          IS_CURRENT as decimal(10,0),",
+				"          BREED_DK as decimal(10,0),",
+				"          SPECIES_NAME as string,",
+				"          PRIMARY_BREED_NAME as string,",
+				"          SECONDARY_BREED_NAME as string,",
+				"          DI_JOB_ID as string,",
+				"          DI_LOAD_AT as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> sourceStage",
+				"source(output(",
+				"          BREED_SK as decimal(10,0),",
+				"          START_DT as date,",
+				"          END_DT as date,",
+				"          IS_CURRENT as decimal(10,0),",
+				"          BREED_DK as decimal(10,0),",
+				"          SPECIES_NAME as string,",
+				"          PRIMARY_BREED_NAME as string,",
+				"          SECONDARY_BREED_NAME as string,",
+				"          DI_JOB_ID as string,",
+				"          DI_LOAD_AT as date",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> SourceBreedDim"
+			]
+		}
+	}
+}
