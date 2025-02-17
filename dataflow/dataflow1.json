@@ -13,10 +13,28 @@
 					"description": "Imported Data from delimited Text"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "SnowflakeTable3",
+						"type": "DatasetReference"
+					},
+					"name": "sinkSnowflake"
+				},
+				{
+					"dataset": {
+						"referenceName": "Parquet1",
+						"type": "DatasetReference"
+					},
+					"name": "PARQUET"
+				}
+			],
 			"transformations": [
 				{
 					"name": "derivedColumn1"
+				},
+				{
+					"name": "PickCleanedColumns"
 				}
 			],
 			"scriptLines": [
@@ -42,7 +60,49 @@
 				"          LICENSE_NUMBER = toInteger(translate(License_Number,'S', '')),",
 				"          ANIMAL_NAME = translate(Animals_Name,'()[]' , ''),",
 				"          JOB_EXC_ID = $Job_Id,",
-				"          JOB_EXC_DT = currentDate()) ~> derivedColumn1"
+				"          JOB_EXC_DT = currentDate(),",
+				"          PRIMARY_BREED = {Primary_Breed}) ~> derivedColumn1",
+				"derivedColumn1 select(mapColumn(",
+				"          LIC_ISSUE_DATE,",
+				"          SECONDARY_BREED = derivedColumn1@SECONDARY_BREED,",
+				"          ZIP_CODE = derivedColumn1@ZIP_CODE,",
+				"          SPECIES = derivedColumn1@SPECIES,",
+				"          LICENSE_NUMBER = derivedColumn1@LICENSE_NUMBER,",
+				"          ANIMAL_NAME,",
+				"          JOB_EXC_ID,",
+				"          JOB_EXC_DT,",
+				"          PRIMARY_BREED = derivedColumn1@PRIMARY_BREED",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> PickCleanedColumns",
+				"PickCleanedColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     truncate:true,",
+				"     format: 'table',",
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          LIC_ISSUE_DATE,",
+				"          SECONDARY_BREED,",
+				"          ZIP_CODE,",
+				"          SPECIES,",
+				"          LICENSE_NUMBER,",
+				"          ANIMAL_NAME,",
+				"          JOB_EXC_ID,",
+				"          JOB_EXC_DT,",
+				"          PRIMARY_BREED",
+				"     )) ~> sinkSnowflake",
+				"PickCleanedColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'parquet',",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> PARQUET"
 			]
 		}
 	}
