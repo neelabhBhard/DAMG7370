@@ -96,7 +96,6 @@
 				"          SPECIES,",
 				"          PRIMARY_BREED,",
 				"          SECONDARY_BREED,",
-				"          MAXBREEDSK,",
 				"          BREED_SK,",
 				"          DI_CREATED_DT,",
 				"          DI_JOB_ID",
