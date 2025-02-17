@@ -23,43 +23,6 @@
 			},
 			"compressionCodec": "snappy"
 		},
-		"schema": [
-			{
-				"name": "LIC_ISSUE_DATE",
-				"type": "DATE"
-			},
-			{
-				"name": "PRIMARY_BREED",
-				"type": "UTF8"
-			},
-			{
-				"name": "SECONDARY_BREED",
-				"type": "UTF8"
-			},
-			{
-				"name": "ZIP_CODE",
-				"type": "UTF8"
-			},
-			{
-				"name": "SPECIES",
-				"type": "UTF8"
-			},
-			{
-				"name": "LICENSE_NUMBER",
-				"type": "INT32"
-			},
-			{
-				"name": "ANIMAL_NAME",
-				"type": "UTF8"
-			},
-			{
-				"name": "JOB_EXC_ID",
-				"type": "UTF8"
-			},
-			{
-				"name": "JOB_EXC_DT",
-				"type": "DATE"
-			}
-		]
+		"schema": []
 	}
 }
