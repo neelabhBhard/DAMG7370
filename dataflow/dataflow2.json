@@ -31,6 +31,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "MAXPETSK"
+				},
+				{
+					"dataset": {
+						"referenceName": "DATE_DIM_IMPORT",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -78,7 +85,24 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     query: 'SELECT NVL(MAX(PET_LIC_SK),0) as MaxpetSK FROM TEMP_SCHEMA.PET_LIC_FCT',",
-				"     format: 'query') ~> MAXPETSK"
+				"     format: 'query') ~> MAXPETSK",
+				"source(output(",
+				"          DT as date,",
+				"          ABRV_DAY_NAME as string,",
+				"          MONTH_NAME as string,",
+				"          START_DAY_OF_MONTH as date,",
+				"          END_DAY_OF_MONTH as date,",
+				"          QUARTER_NUM as decimal(2,0),",
+				"          DAY_OF_WEEK as decimal(2,0),",
+				"          IS_WEEKEND as decimal(1,0),",
+				"          YEAR_NUM as decimal(4,0),",
+				"          MONTH_NUM as decimal(2,0),",
+				"          DAY_NUM as decimal(2,0),",
+				"          DATE_DIM_SK as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> source1"
 			]
 		}
 	}
