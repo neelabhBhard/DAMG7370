@@ -10,7 +10,7 @@
 		"schema": [],
 		"typeProperties": {
 			"schema": "TEMP_SCHEMA",
-			"table": "LOCATION_DIM"
+			"table": "V2_PET_LICENSE_STAGE"
 		}
 	}
 }
