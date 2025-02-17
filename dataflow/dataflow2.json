@@ -55,7 +55,7 @@
 					"name": "CrossJoin"
 				},
 				{
-					"name": "SurrogateKeyfct"
+					"name": "select1"
 				}
 			],
 			"scriptLines": [
@@ -141,9 +141,16 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> CrossJoin",
-				"CrossJoin keyGenerate(output(RowNum1 as long),",
-				"     startAt: 1L,",
-				"     stepValue: 1L) ~> SurrogateKeyfct"
+				"CrossJoin select(mapColumn(",
+				"          JOB_EXC_ID,",
+				"          JOB_EXC_DT,",
+				"          LOCATION_SK,",
+				"          BREED_SK,",
+				"          DATE_DIM_SK,",
+				"          PET_LIC_SK = MAXPETSK",
+				"     ),",
+				"     skipDuplicateMapInputs: false,",
+				"     skipDuplicateMapOutputs: false) ~> select1"
 			]
 		}
 	}
