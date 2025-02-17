@@ -16,7 +16,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "SnowflakeTable3",
+						"referenceName": "SnowflakeTable5",
 						"type": "DatasetReference"
 					},
 					"name": "sinkSnowflake"
@@ -115,10 +115,10 @@
 				"     mapColumn(",
 				"          LIC_ISSUE_DATE,",
 				"          PRIMARY_BREED,",
-				"          SECONDARY_BREED = PickCleanedColumns@SECONDARY_BREED,",
-				"          ZIP_CODE = PickCleanedColumns@ZIP_CODE,",
-				"          SPECIES = PickCleanedColumns@SPECIES,",
-				"          LICENSE_NUMBER = PickCleanedColumns@LICENSE_NUMBER,",
+				"          SECONDARY_BREED = {PickCleanedColumns@SECONDARY_BREED},",
+				"          ZIP_CODE = {PickCleanedColumns@ZIP_CODE},",
+				"          SPECIES = {PickCleanedColumns@SPECIES},",
+				"          LICENSE_NUMBER = {PickCleanedColumns@LICENSE_NUMBER},",
 				"          ANIMAL_NAME,",
 				"          JOB_EXC_ID,",
 				"          JOB_EXC_DT",
