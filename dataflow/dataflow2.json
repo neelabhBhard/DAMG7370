@@ -184,7 +184,7 @@
 				"          {DI_LOAD_DT } = JOB_EXC_DT,",
 				"          LOCATION_SK,",
 				"          BREED_SK,",
-				"          DATE_DIM_SK,",
+				"          DATE_SK = DATE_DIM_SK,",
 				"          PET_LIC_SK",
 				"     )) ~> SinkintoFACT"
 			]
