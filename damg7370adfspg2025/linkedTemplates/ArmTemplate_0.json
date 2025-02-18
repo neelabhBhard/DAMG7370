@@ -1,0 +1,607 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "damg7370adfspg2025"
+		},
+		"BREED_DIM_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'BREED_DIM'"
+		},
+		"DATE_DIM_IMPORT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DATE_DIM_IMPORT'"
+		},
+		"FCT_TABLE_IMPORT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'FCT_TABLE_IMPORT'"
+		},
+		"IMPORTING_STAGE_DATA_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'IMPORTING_STAGE_DATA'"
+		},
+		"LOCATION_DIM_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LOCATION_DIM'"
+		},
+		"Snowflake1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake1'"
+		},
+		"Snowflake2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake2'"
+		},
+		"Snowflake3_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake3'"
+		},
+		"Snowflake4_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake4'"
+		},
+		"Snowflake4_LOCATION_DIM_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake4_LOCATION_DIM'"
+		},
+		"AzureBlobStorage1_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'AzureBlobStorage1'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://damg7370spg2025.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://damgkvspg2025.vault.azure.net/"
+		},
+		"BREED_DIM_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"BREED_DIM_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"DATE_DIM_IMPORT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"DATE_DIM_IMPORT_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"FCT_TABLE_IMPORT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"FCT_TABLE_IMPORT_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"IMPORTING_STAGE_DATA_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"IMPORTING_STAGE_DATA_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"LOCATION_DIM_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"LOCATION_DIM_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"Snowflake1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "NYPD_CRIME_DB"
+		},
+		"Snowflake1_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "COP_ROLE"
+		},
+		"Snowflake2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"Snowflake2_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"Snowflake3_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"Snowflake3_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"Snowflake4_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"Snowflake4_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"Snowflake4_LOCATION_DIM_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"Snowflake4_LOCATION_DIM_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureBlobStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"sasUri": "[parameters('AzureBlobStorage1_sasUri')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureDataLakeStorage1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "adf to access my storage containers",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/AzureKeyVault1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "access my key vault from azure data factory",
+				"annotations": [],
+				"type": "AzureKeyVault",
+				"typeProperties": {
+					"baseUrl": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BREED_DIM')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "hxa54740.east-us-2.azure",
+					"user": "TEMP_USER",
+					"database": "[parameters('BREED_DIM_properties_typeProperties_database')]",
+					"warehouse": "TEMP_WH",
+					"role": "[parameters('BREED_DIM_properties_typeProperties_role')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('BREED_DIM_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DATE_DIM_IMPORT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "hxa54740.east-us-2.azure",
+					"user": "TEMP_USER",
+					"database": "[parameters('DATE_DIM_IMPORT_properties_typeProperties_database')]",
+					"warehouse": "TEMP_WH",
+					"role": "[parameters('DATE_DIM_IMPORT_properties_typeProperties_role')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('DATE_DIM_IMPORT_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FCT_TABLE_IMPORT')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "hxa54740.east-us-2.azure",
+					"user": "TEMP_USER",
+					"database": "[parameters('FCT_TABLE_IMPORT_properties_typeProperties_database')]",
+					"warehouse": "TEMP_WH",
+					"role": "[parameters('FCT_TABLE_IMPORT_properties_typeProperties_role')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('FCT_TABLE_IMPORT_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/IMPORTING_STAGE_DATA')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "hxa54740.east-us-2.azure",
+					"user": "TEMP_USER",
+					"database": "[parameters('IMPORTING_STAGE_DATA_properties_typeProperties_database')]",
+					"warehouse": "TEMP_WH",
+					"role": "[parameters('IMPORTING_STAGE_DATA_properties_typeProperties_role')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('IMPORTING_STAGE_DATA_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/LOCATION_DIM')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "hxa54740.east-us-2.azure",
+					"user": "TEMP_USER",
+					"database": "[parameters('LOCATION_DIM_properties_typeProperties_database')]",
+					"warehouse": "TEMP_WH",
+					"role": "[parameters('LOCATION_DIM_properties_typeProperties_role')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('LOCATION_DIM_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Snowflake1')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "hxa54740.east-us-2.azure",
+					"user": "NYPD_USER",
+					"database": "[parameters('Snowflake1_properties_typeProperties_database')]",
+					"warehouse": "TEMP_WH",
+					"role": "[parameters('Snowflake1_properties_typeProperties_role')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Snowflake1_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Snowflake2')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "hxa54740.east-us-2.azure",
+					"user": "TEMP_USER",
+					"database": "[parameters('Snowflake2_properties_typeProperties_database')]",
+					"warehouse": "TEMP_WH",
+					"role": "[parameters('Snowflake2_properties_typeProperties_role')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Snowflake2_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Snowflake3')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "hxa54740.east-us-2.azure",
+					"user": "TEMP_USER",
+					"database": "[parameters('Snowflake3_properties_typeProperties_database')]",
+					"warehouse": "TEMP_WH",
+					"role": "[parameters('Snowflake3_properties_typeProperties_role')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Snowflake3_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Snowflake4')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "hxa54740.east-us-2.azure",
+					"user": "TEMP_USER",
+					"database": "[parameters('Snowflake4_properties_typeProperties_database')]",
+					"warehouse": "TEMP_WH",
+					"role": "[parameters('Snowflake4_properties_typeProperties_role')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Snowflake4_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/Snowflake4_LOCATION_DIM')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"annotations": [],
+				"type": "SnowflakeV2",
+				"typeProperties": {
+					"authenticationType": "Basic",
+					"accountIdentifier": "hxa5470.east-us2.azure",
+					"user": "TEMP_USER",
+					"database": "[parameters('Snowflake4_LOCATION_DIM_properties_typeProperties_database')]",
+					"warehouse": "TEMP_WH",
+					"role": "[parameters('Snowflake4_LOCATION_DIM_properties_typeProperties_role')]",
+					"password": {
+						"type": "SecureString",
+						"value": "[parameters('Snowflake4_LOCATION_DIM_password')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/BREED_DIM_IMPORT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "BREED_DIM",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TEMP_SCHEMA",
+					"table": "BREED_DIM"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/BREED_DIM')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DATE_DIM_IMPORT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "DATE_DIM_IMPORT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TEMP_SCHEMA",
+					"table": "DATE_DIM"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/DATE_DIM_IMPORT')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "NYPD_DATASET_3.csv",
+						"fileSystem": "silver"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText2')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Directory": {
+						"type": "string",
+						"defaultValue": "na"
+					},
+					"Filename": {
+						"type": "string",
+						"defaultValue": "Seattle_Pet_Licenses_new.tsv"
+					},
+					"FileDilemter": {
+						"type": "string",
+						"defaultValue": "\\t"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@dataset().Filename",
+							"type": "Expression"
+						},
+						"fileSystem": "bronze"
+					},
+					"columnDelimiter": "\t",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/DelimitedText3')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"parameters": {
+					"Filename": {
+						"type": "string",
+						"defaultValue": "Seattle_Pet_Licenses_new"
+					}
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "Seattle_Pet_Licenses_new.tsv",
+						"fileSystem": "bronze"
+					},
+					"columnDelimiter": "\t",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/FCT_TABLE_IMPORT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "FCT_TABLE_IMPORT",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "SnowflakeV2Table",
+				"schema": [],
+				"typeProperties": {
+					"schema": "TEMP_SCHEMA",
+					"table": "PET_LIC_FCT"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/FCT_TABLE_IMPORT')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/GEODATAIMPORT')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureDataLakeStorage1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "geo-data.csv",
+						"fileSystem": "bronze"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/AzureDataLakeStorage1')]"
+			]
+		}
+	]
+}

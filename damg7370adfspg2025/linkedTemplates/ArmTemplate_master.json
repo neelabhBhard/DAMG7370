@@ -1,0 +1,293 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "damg7370adfspg2025"
+		},
+		"BREED_DIM_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'BREED_DIM'"
+		},
+		"DATE_DIM_IMPORT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'DATE_DIM_IMPORT'"
+		},
+		"FCT_TABLE_IMPORT_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'FCT_TABLE_IMPORT'"
+		},
+		"IMPORTING_STAGE_DATA_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'IMPORTING_STAGE_DATA'"
+		},
+		"LOCATION_DIM_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'LOCATION_DIM'"
+		},
+		"Snowflake1_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake1'"
+		},
+		"Snowflake2_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake2'"
+		},
+		"Snowflake3_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake3'"
+		},
+		"Snowflake4_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake4'"
+		},
+		"Snowflake4_LOCATION_DIM_password": {
+			"type": "secureString",
+			"metadata": "Secure string for 'password' of 'Snowflake4_LOCATION_DIM'"
+		},
+		"AzureBlobStorage1_sasUri": {
+			"type": "secureString",
+			"metadata": "Secure string for 'sasUri' of 'AzureBlobStorage1'"
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://damg7370spg2025.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"type": "string",
+			"defaultValue": "https://damgkvspg2025.vault.azure.net/"
+		},
+		"BREED_DIM_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"BREED_DIM_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"DATE_DIM_IMPORT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"DATE_DIM_IMPORT_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"FCT_TABLE_IMPORT_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"FCT_TABLE_IMPORT_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"IMPORTING_STAGE_DATA_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"IMPORTING_STAGE_DATA_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"LOCATION_DIM_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"LOCATION_DIM_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"Snowflake1_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "NYPD_CRIME_DB"
+		},
+		"Snowflake1_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "COP_ROLE"
+		},
+		"Snowflake2_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"Snowflake2_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"Snowflake3_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"Snowflake3_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"Snowflake4_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"Snowflake4_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"Snowflake4_LOCATION_DIM_properties_typeProperties_database": {
+			"type": "string",
+			"defaultValue": "TEMP_DB"
+		},
+		"Snowflake4_LOCATION_DIM_properties_typeProperties_role": {
+			"type": "string",
+			"defaultValue": "TEMP_ROLE"
+		},
+		"containerUri": {
+			"type": "string",
+			"metadata": "URI to storage account containing linked ARM templates"
+		},
+		"containerSasToken": {
+			"type": "string",
+			"metadata": "Sas token to storage account containing linked ARM templates"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "damg7370adfspg2025_ArmTemplate_0",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_0.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					},
+					"BREED_DIM_password": {
+						"value": "[parameters('BREED_DIM_password')]"
+					},
+					"DATE_DIM_IMPORT_password": {
+						"value": "[parameters('DATE_DIM_IMPORT_password')]"
+					},
+					"FCT_TABLE_IMPORT_password": {
+						"value": "[parameters('FCT_TABLE_IMPORT_password')]"
+					},
+					"IMPORTING_STAGE_DATA_password": {
+						"value": "[parameters('IMPORTING_STAGE_DATA_password')]"
+					},
+					"LOCATION_DIM_password": {
+						"value": "[parameters('LOCATION_DIM_password')]"
+					},
+					"Snowflake1_password": {
+						"value": "[parameters('Snowflake1_password')]"
+					},
+					"Snowflake2_password": {
+						"value": "[parameters('Snowflake2_password')]"
+					},
+					"Snowflake3_password": {
+						"value": "[parameters('Snowflake3_password')]"
+					},
+					"Snowflake4_password": {
+						"value": "[parameters('Snowflake4_password')]"
+					},
+					"Snowflake4_LOCATION_DIM_password": {
+						"value": "[parameters('Snowflake4_LOCATION_DIM_password')]"
+					},
+					"AzureBlobStorage1_sasUri": {
+						"value": "[parameters('AzureBlobStorage1_sasUri')]"
+					},
+					"AzureDataLakeStorage1_properties_typeProperties_url": {
+						"value": "[parameters('AzureDataLakeStorage1_properties_typeProperties_url')]"
+					},
+					"AzureKeyVault1_properties_typeProperties_baseUrl": {
+						"value": "[parameters('AzureKeyVault1_properties_typeProperties_baseUrl')]"
+					},
+					"BREED_DIM_properties_typeProperties_database": {
+						"value": "[parameters('BREED_DIM_properties_typeProperties_database')]"
+					},
+					"BREED_DIM_properties_typeProperties_role": {
+						"value": "[parameters('BREED_DIM_properties_typeProperties_role')]"
+					},
+					"DATE_DIM_IMPORT_properties_typeProperties_database": {
+						"value": "[parameters('DATE_DIM_IMPORT_properties_typeProperties_database')]"
+					},
+					"DATE_DIM_IMPORT_properties_typeProperties_role": {
+						"value": "[parameters('DATE_DIM_IMPORT_properties_typeProperties_role')]"
+					},
+					"FCT_TABLE_IMPORT_properties_typeProperties_database": {
+						"value": "[parameters('FCT_TABLE_IMPORT_properties_typeProperties_database')]"
+					},
+					"FCT_TABLE_IMPORT_properties_typeProperties_role": {
+						"value": "[parameters('FCT_TABLE_IMPORT_properties_typeProperties_role')]"
+					},
+					"IMPORTING_STAGE_DATA_properties_typeProperties_database": {
+						"value": "[parameters('IMPORTING_STAGE_DATA_properties_typeProperties_database')]"
+					},
+					"IMPORTING_STAGE_DATA_properties_typeProperties_role": {
+						"value": "[parameters('IMPORTING_STAGE_DATA_properties_typeProperties_role')]"
+					},
+					"LOCATION_DIM_properties_typeProperties_database": {
+						"value": "[parameters('LOCATION_DIM_properties_typeProperties_database')]"
+					},
+					"LOCATION_DIM_properties_typeProperties_role": {
+						"value": "[parameters('LOCATION_DIM_properties_typeProperties_role')]"
+					},
+					"Snowflake1_properties_typeProperties_database": {
+						"value": "[parameters('Snowflake1_properties_typeProperties_database')]"
+					},
+					"Snowflake1_properties_typeProperties_role": {
+						"value": "[parameters('Snowflake1_properties_typeProperties_role')]"
+					},
+					"Snowflake2_properties_typeProperties_database": {
+						"value": "[parameters('Snowflake2_properties_typeProperties_database')]"
+					},
+					"Snowflake2_properties_typeProperties_role": {
+						"value": "[parameters('Snowflake2_properties_typeProperties_role')]"
+					},
+					"Snowflake3_properties_typeProperties_database": {
+						"value": "[parameters('Snowflake3_properties_typeProperties_database')]"
+					},
+					"Snowflake3_properties_typeProperties_role": {
+						"value": "[parameters('Snowflake3_properties_typeProperties_role')]"
+					},
+					"Snowflake4_properties_typeProperties_database": {
+						"value": "[parameters('Snowflake4_properties_typeProperties_database')]"
+					},
+					"Snowflake4_properties_typeProperties_role": {
+						"value": "[parameters('Snowflake4_properties_typeProperties_role')]"
+					},
+					"Snowflake4_LOCATION_DIM_properties_typeProperties_database": {
+						"value": "[parameters('Snowflake4_LOCATION_DIM_properties_typeProperties_database')]"
+					},
+					"Snowflake4_LOCATION_DIM_properties_typeProperties_role": {
+						"value": "[parameters('Snowflake4_LOCATION_DIM_properties_typeProperties_role')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "damg7370adfspg2025_ArmTemplate_1",
+			"type": "Microsoft.Resources/deployments",
+			"apiVersion": "2024-03-01",
+			"properties": {
+				"mode": "incremental",
+				"templateLink": {
+					"uri": "[concat(parameters('containerUri'), '/ArmTemplate_1.json', parameters('containerSasToken'))]",
+					"contentVersion": "1.0.0.0"
+				},
+				"parameters": {
+					"factoryName": {
+						"value": "[parameters('factoryName')]"
+					}
+				}
+			},
+			"dependsOn": [
+				"[resourceId('Microsoft.Resources/deployments', 'damg7370adfspg2025_ArmTemplate_0')]"
+			]
+		}
+	]
+}

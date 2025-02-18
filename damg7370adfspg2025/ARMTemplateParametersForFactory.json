@@ -1,0 +1,108 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "damg7370adfspg2025"
+		},
+		"BREED_DIM_password": {
+			"value": ""
+		},
+		"DATE_DIM_IMPORT_password": {
+			"value": ""
+		},
+		"FCT_TABLE_IMPORT_password": {
+			"value": ""
+		},
+		"IMPORTING_STAGE_DATA_password": {
+			"value": ""
+		},
+		"LOCATION_DIM_password": {
+			"value": ""
+		},
+		"Snowflake1_password": {
+			"value": ""
+		},
+		"Snowflake2_password": {
+			"value": ""
+		},
+		"Snowflake3_password": {
+			"value": ""
+		},
+		"Snowflake4_password": {
+			"value": ""
+		},
+		"Snowflake4_LOCATION_DIM_password": {
+			"value": ""
+		},
+		"AzureBlobStorage1_sasUri": {
+			"value": ""
+		},
+		"AzureDataLakeStorage1_properties_typeProperties_url": {
+			"value": "https://damg7370spg2025.dfs.core.windows.net/"
+		},
+		"AzureKeyVault1_properties_typeProperties_baseUrl": {
+			"value": "https://damgkvspg2025.vault.azure.net/"
+		},
+		"BREED_DIM_properties_typeProperties_database": {
+			"value": "TEMP_DB"
+		},
+		"BREED_DIM_properties_typeProperties_role": {
+			"value": "TEMP_ROLE"
+		},
+		"DATE_DIM_IMPORT_properties_typeProperties_database": {
+			"value": "TEMP_DB"
+		},
+		"DATE_DIM_IMPORT_properties_typeProperties_role": {
+			"value": "TEMP_ROLE"
+		},
+		"FCT_TABLE_IMPORT_properties_typeProperties_database": {
+			"value": "TEMP_DB"
+		},
+		"FCT_TABLE_IMPORT_properties_typeProperties_role": {
+			"value": "TEMP_ROLE"
+		},
+		"IMPORTING_STAGE_DATA_properties_typeProperties_database": {
+			"value": "TEMP_DB"
+		},
+		"IMPORTING_STAGE_DATA_properties_typeProperties_role": {
+			"value": "TEMP_ROLE"
+		},
+		"LOCATION_DIM_properties_typeProperties_database": {
+			"value": "TEMP_DB"
+		},
+		"LOCATION_DIM_properties_typeProperties_role": {
+			"value": "TEMP_ROLE"
+		},
+		"Snowflake1_properties_typeProperties_database": {
+			"value": "NYPD_CRIME_DB"
+		},
+		"Snowflake1_properties_typeProperties_role": {
+			"value": "COP_ROLE"
+		},
+		"Snowflake2_properties_typeProperties_database": {
+			"value": "TEMP_DB"
+		},
+		"Snowflake2_properties_typeProperties_role": {
+			"value": "TEMP_ROLE"
+		},
+		"Snowflake3_properties_typeProperties_database": {
+			"value": "TEMP_DB"
+		},
+		"Snowflake3_properties_typeProperties_role": {
+			"value": "TEMP_ROLE"
+		},
+		"Snowflake4_properties_typeProperties_database": {
+			"value": "TEMP_DB"
+		},
+		"Snowflake4_properties_typeProperties_role": {
+			"value": "TEMP_ROLE"
+		},
+		"Snowflake4_LOCATION_DIM_properties_typeProperties_database": {
+			"value": "TEMP_DB"
+		},
+		"Snowflake4_LOCATION_DIM_properties_typeProperties_role": {
+			"value": "TEMP_ROLE"
+		}
+	}
+}
