@@ -20,13 +20,6 @@
 						"type": "DatasetReference"
 					},
 					"name": "sinkSnowflake"
-				},
-				{
-					"dataset": {
-						"referenceName": "Parquet1",
-						"type": "DatasetReference"
-					},
-					"name": "PARQUET"
 				}
 			],
 			"transformations": [
@@ -105,24 +98,7 @@
 				"          JOB_EXC_ID,",
 				"          JOB_EXC_DT,",
 				"          PRIMARY_BREED",
-				"     )) ~> sinkSnowflake",
-				"PickCleanedColumns sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     format: 'parquet',",
-				"     umask: 0022,",
-				"     preCommands: [],",
-				"     postCommands: [],",
-				"     mapColumn(",
-				"          LIC_ISSUE_DATE,",
-				"          PRIMARY_BREED,",
-				"          SECONDARY_BREED = {PickCleanedColumns@SECONDARY_BREED},",
-				"          ZIP_CODE = {PickCleanedColumns@ZIP_CODE},",
-				"          SPECIES = {PickCleanedColumns@SPECIES},",
-				"          LICENSE_NUMBER = {PickCleanedColumns@LICENSE_NUMBER},",
-				"          ANIMAL_NAME,",
-				"          JOB_EXC_ID,",
-				"          JOB_EXC_DT",
-				"     )) ~> PARQUET"
+				"     )) ~> sinkSnowflake"
 			]
 		}
 	}
