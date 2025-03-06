@@ -1,0 +1,11 @@
+{
+	"name": "AzureDataLakeStorage2_IMDB_LS",
+	"properties": {
+		"description": "Connecting Storage Account to ADF",
+		"annotations": [],
+		"type": "AzureBlobFS",
+		"typeProperties": {
+			"url": "https://damg7370spg2025.dfs.core.windows.net/"
+		}
+	}
+}
