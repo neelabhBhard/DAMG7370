@@ -39,6 +39,111 @@
 							"type": "LinkedServiceReference"
 						},
 						"path": "stagesnowflake"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "invoiceId",
+									"type": "String"
+								},
+								"sink": {
+									"name": "INVOICEID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "customerid",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CUSTOMERID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "invoiceDate",
+									"type": "String"
+								},
+								"sink": {
+									"name": "INVOICEDATE",
+									"type": "DateTime"
+								}
+							},
+							{
+								"source": {
+									"name": "ShipTo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SHIPTO",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ShipTo_City",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SHIPTOCITY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "ShipTo_Country",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SHIPTOCOUNTRY",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SalespersonPersonID",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SALESPERSONID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "SalespersonName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "SALESPERSONNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "total_product_cnt",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "TOTALPRODUCTCOUNT",
+									"type": "Int64"
+								}
+							},
+							{
+								"source": {
+									"name": "Total",
+									"type": "Int64"
+								},
+								"sink": {
+									"name": "TOTAL",
+									"type": "Int64"
+								}
+							}
+						]
 					}
 				},
 				"inputs": [
