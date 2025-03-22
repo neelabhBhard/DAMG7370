@@ -1,0 +1,16 @@
+{
+	"name": "STAGINGCUSTOMER",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake5",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [],
+		"typeProperties": {
+			"schema": "TEMP_SCHEMA",
+			"table": "CUSTOMER_STG"
+		}
+	}
+}
