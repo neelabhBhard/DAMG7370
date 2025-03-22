@@ -1,0 +1,61 @@
+{
+	"name": "SALESSTAGE",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "Snowflake6",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "INVOICEID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "CUSTOMERID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "INVOICEDATE",
+				"type": "DATE"
+			},
+			{
+				"name": "SHIPTO",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SHIPTOCITY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SHIPTOCOUNTRY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SALESPERSONID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SALESPERSONNAME",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "TOTALPRODUCTCOUNT",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "TOTAL",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			}
+		],
+		"typeProperties": {
+			"schema": "TEMP_SCHEMA",
+			"table": "SALES_STG"
+		}
+	}
+}
