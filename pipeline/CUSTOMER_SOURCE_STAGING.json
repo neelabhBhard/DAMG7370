@@ -32,7 +32,49 @@
 							"type": "SnowflakeImportCopyCommand"
 						}
 					},
-					"enableStaging": false
+					"enableStaging": true,
+					"stagingSettings": {
+						"linkedServiceName": {
+							"referenceName": "AzureBlobStorage1",
+							"type": "LinkedServiceReference"
+						},
+						"path": "stagesnowflake"
+					},
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"name": "customerid",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CUSTOMERID",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "CustomerName",
+									"type": "String"
+								},
+								"sink": {
+									"name": "CUSTOMERNAME",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"name": "billTo",
+									"type": "String"
+								},
+								"sink": {
+									"name": "BILLTO",
+									"type": "String"
+								}
+							}
+						]
+					}
 				},
 				"inputs": [
 					{
