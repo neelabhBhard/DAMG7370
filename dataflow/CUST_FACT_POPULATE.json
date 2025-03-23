@@ -1,0 +1,29 @@
+{
+	"name": "CUST_FACT_POPULATE",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "IMPORITNGCUSTDIM",
+						"type": "DatasetReference"
+					},
+					"name": "CUSTSTG"
+				}
+			],
+			"sinks": [],
+			"transformations": [],
+			"scriptLines": [
+				"source(output(",
+				"          CUSTOMERID as string,",
+				"          CUSTOMERNAME as string,",
+				"          BILLTO as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> CUSTSTG"
+			]
+		}
+	}
+}
