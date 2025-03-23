@@ -177,14 +177,13 @@
 				"     stageInsert: true,",
 				"     mapColumn(",
 				"          INVOICE_SK,",
-				"          INVOICEID,",
+				"          INVOICE_ID = INVOICEID,",
 				"          CUSTOMER_ID,",
-				"          INVOICEDATE,",
-				"          TOTALPRODUCTCOUNT,",
-				"          TOTAL,",
+				"          INVOICE_DT = INVOICEDATE,",
+				"          TOTAL_PRODUCT_CNT = TOTALPRODUCTCOUNT,",
+				"          TOTAL_PRODUCT_COST = TOTAL,",
 				"          PID,",
-				"          DI_CREATEDDT,",
-				"          count",
+				"          DI_CREATEDDT",
 				"     )) ~> sink2"
 			]
 		}
