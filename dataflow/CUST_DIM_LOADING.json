@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "CUSTOMERSTAGE"
+				},
+				{
+					"dataset": {
+						"referenceName": "IMPORTINGCUSTDIM",
+						"type": "DatasetReference"
+					},
+					"name": "CUSTOMERDIM"
 				}
 			],
 			"sinks": [],
@@ -22,7 +29,17 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> CUSTOMERSTAGE"
+				"     format: 'table') ~> CUSTOMERSTAGE",
+				"source(output(",
+				"          CUSTOMER_SK as decimal(38,0),",
+				"          CUSTOMER_ID as string,",
+				"          CUSTOMER_NAME as string,",
+				"          DI_CREATEDDT as date,",
+				"          PID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> CUSTOMERDIM"
 			]
 		}
 	}

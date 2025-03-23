@@ -1,0 +1,39 @@
+{
+	"name": "IMPORTINGCUSTDIM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "FETCHINGCUSTDIM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "CUSTOMER_SK",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "CUSTOMER_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "CUSTOMER_NAME",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "DI_CREATEDDT",
+				"type": "DATE"
+			},
+			{
+				"name": "PID",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "TEMP_SCHEMA",
+			"table": "DIM_CUSTOMER"
+		}
+	}
+}
