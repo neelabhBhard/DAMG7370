@@ -136,7 +136,7 @@
 							{
 								"source": {
 									"name": "Total",
-									"type": "Int64"
+									"type": "Double"
 								},
 								"sink": {
 									"name": "TOTAL",

@@ -43,8 +43,8 @@
 			{
 				"name": "TOTALPRODUCTCOUNT",
 				"type": "NUMBER",
-				"precision": 38,
-				"scale": 0
+				"precision": 10,
+				"scale": 4
 			},
 			{
 				"name": "TOTAL",
