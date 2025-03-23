@@ -49,7 +49,7 @@
 		],
 		"typeProperties": {
 			"schema": "TEMP_SCHEMA",
-			"table": "ORPHAN_INVOICE"
+			"table": "FCT_INVOICE"
 		}
 	}
 }
