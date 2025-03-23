@@ -22,7 +22,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "IMPORITNGCUSTDIM",
+						"referenceName": "IMPORTINGCUSTDIM",
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
@@ -79,9 +79,11 @@
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
-				"          CUSTOMERID as string,",
-				"          CUSTOMERNAME as string,",
-				"          BILLTO as string",
+				"          CUSTOMER_SK as decimal(38,0),",
+				"          CUSTOMER_ID as string,",
+				"          CUSTOMER_NAME as string,",
+				"          DI_CREATEDDT as date,",
+				"          PID as string",
 				"     ),",
 				"     deletable:false,",
 				"     insertable:true,",
