@@ -13,13 +13,6 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "IMPORTINGCUSTDIM",
-						"type": "DatasetReference"
-					},
-					"name": "CUSTDIM"
-				},
-				{
-					"dataset": {
 						"referenceName": "FACTPOPULATEINVOICE",
 						"type": "DatasetReference"
 					},
@@ -29,13 +22,6 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "FACTPOPULATEINVOICE",
-						"type": "DatasetReference"
-					},
-					"name": "sink1"
-				},
-				{
-					"dataset": {
 						"referenceName": "ORPHANTABLEPOPULATE",
 						"type": "DatasetReference"
 					},
@@ -43,9 +29,6 @@
 				}
 			],
 			"transformations": [
-				{
-					"name": "Leftjoin"
-				},
 				{
 					"name": "join1"
 				},
@@ -57,9 +40,6 @@
 				},
 				{
 					"name": "aggregate1"
-				},
-				{
-					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -82,28 +62,13 @@
 				"     validateSchema: false,",
 				"     format: 'table') ~> SALESSTG",
 				"source(output(",
-				"          CUSTOMER_SK as decimal(38,0),",
-				"          CUSTOMER_ID as string,",
-				"          CUSTOMER_NAME as string,",
-				"          DI_CREATEDDT as date,",
-				"          PID as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     format: 'table') ~> CUSTDIM",
-				"source(output(",
 				"          MAXINVOICESK as decimal(38,0)",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     query: 'SELECT NVL(MAX(invoice_sk),0) as MaxinvoiceSK FROM TEMP_SCHEMA.fct_invoice',",
 				"     format: 'query') ~> FACTINVOICE",
-				"SALESSTG, CUSTDIM join(CUSTOMERID == CUSTOMER_ID,",
-				"     joinType:'left',",
-				"     matchType:'exact',",
-				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> Leftjoin",
-				"Leftjoin, FACTINVOICE join(1 == 1,",
+				"SALESSTG, FACTINVOICE join(1 == 1,",
 				"     joinType:'cross',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
@@ -124,39 +89,7 @@
 				"          PID,",
 				"          DI_CREATEDDT),",
 				"     count = count(INVOICEID)) ~> aggregate1",
-				"aggregate1 split(!isNull(CUSTOMER_ID),",
-				"     disjoint: false) ~> split1@(VALIDRECORD, ORPHANRECORDS)",
-				"split1@VALIDRECORD sink(allowSchemaDrift: true,",
-				"     validateSchema: false,",
-				"     input(",
-				"          INVOICE_SK as decimal(38,0),",
-				"          INVOICE_ID as string,",
-				"          CUSTOMER_ID as string,",
-				"          INVOICE_DT as date,",
-				"          TOTAL_PRODUCT_CNT as decimal(38,0),",
-				"          TOTAL_PRODUCT_COST as decimal(10,4),",
-				"          DI_CREATEDDT as date,",
-				"          PID as string",
-				"     ),",
-				"     deletable:false,",
-				"     insertable:true,",
-				"     updateable:false,",
-				"     upsertable:false,",
-				"     format: 'table',",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true,",
-				"     stageInsert: true,",
-				"     mapColumn(",
-				"          INVOICE_SK,",
-				"          INVOICE_ID = INVOICEID,",
-				"          CUSTOMER_ID,",
-				"          INVOICE_DT = INVOICEDATE,",
-				"          TOTAL_PRODUCT_CNT = TOTALPRODUCTCOUNT,",
-				"          TOTAL_PRODUCT_COST = TOTAL,",
-				"          DI_CREATEDDT,",
-				"          PID",
-				"     )) ~> sink1",
-				"split1@ORPHANRECORDS sink(allowSchemaDrift: true,",
+				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          INVOICE_SK as decimal(38,0),",
