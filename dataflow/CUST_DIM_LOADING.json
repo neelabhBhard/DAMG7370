@@ -94,13 +94,11 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     stageInsert: true,",
 				"     mapColumn(",
-				"          MAXCUSTSK,",
-				"          CUSTOMERID,",
-				"          CUSTOMERNAME,",
-				"          Counts,",
-				"          Rownum,",
+				"          CUSTOMER_SK = MAXCUSTSK,",
+				"          CUSTOMER_ID = CUSTOMERID,",
+				"          CUSTOMER_NAME = CUSTOMERNAME,",
 				"          PID,",
-				"          DI_CreatedDt",
+				"          DI_CREATEDDT = DI_CreatedDt",
 				"     )) ~> sink1"
 			]
 		}
