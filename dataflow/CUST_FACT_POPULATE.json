@@ -6,7 +6,7 @@
 			"sources": [
 				{
 					"dataset": {
-						"referenceName": "IMPORITNGCUSTDIM",
+						"referenceName": "SALESSTAGE",
 						"type": "DatasetReference"
 					},
 					"name": "CUSTSTG"
@@ -30,9 +30,16 @@
 			"transformations": [],
 			"scriptLines": [
 				"source(output(",
+				"          INVOICEID as string,",
 				"          CUSTOMERID as string,",
-				"          CUSTOMERNAME as string,",
-				"          BILLTO as string",
+				"          INVOICEDATE as date,",
+				"          SHIPTO as string,",
+				"          SHIPTOCITY as string,",
+				"          SHIPTOCOUNTRY as string,",
+				"          SALESPERSONID as string,",
+				"          SALESPERSONNAME as string,",
+				"          TOTALPRODUCTCOUNT as decimal(10,4),",
+				"          TOTAL as decimal(38,0)",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
