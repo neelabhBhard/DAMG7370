@@ -1,0 +1,29 @@
+{
+	"name": "IMPORITNGCUSTDIM",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "IMPORTINGCUSTDIM",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "SnowflakeV2Table",
+		"schema": [
+			{
+				"name": "CUSTOMERID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "CUSTOMERNAME",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "BILLTO",
+				"type": "VARCHAR"
+			}
+		],
+		"typeProperties": {
+			"schema": "TEMP_SCHEMA",
+			"table": "CUSTOMER_STG"
+		}
+	}
+}
