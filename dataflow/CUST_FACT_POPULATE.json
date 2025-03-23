@@ -17,6 +17,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "CUSTDIM"
+				},
+				{
+					"dataset": {
+						"referenceName": "FACTPOPULATEINVOICE",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
 				}
 			],
 			"sinks": [],
@@ -39,7 +46,20 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> CUSTDIM"
+				"     format: 'table') ~> CUSTDIM",
+				"source(output(",
+				"          INVOICE_SK as decimal(38,0),",
+				"          INVOICE_ID as string,",
+				"          CUSTOMER_ID as string,",
+				"          INVOICE_DT as date,",
+				"          TOTAL_PRODUCT_CNT as decimal(38,0),",
+				"          TOTAL_PRODUCT_COST as decimal(10,4),",
+				"          DI_CREATEDDT as date,",
+				"          PID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> source1"
 			]
 		}
 	}
