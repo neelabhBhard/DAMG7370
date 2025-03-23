@@ -20,7 +20,14 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "aggregate1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          CUSTOMERID as string,",
@@ -31,15 +38,21 @@
 				"     validateSchema: false,",
 				"     format: 'table') ~> CUSTOMERSTAGE",
 				"source(output(",
-				"          CUSTOMER_SK as decimal(38,0),",
-				"          CUSTOMER_ID as string,",
-				"          CUSTOMER_NAME as string,",
-				"          DI_CREATEDDT as date,",
-				"          PID as string",
+				"          MAXCUSTSK as decimal(38,0)",
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> CUSTOMERDIM"
+				"     query: 'SELECT NVL(MAX(customer_sk),0) as MaxcustSK FROM TEMP_SCHEMA.dim_customer',",
+				"     format: 'query') ~> CUSTOMERDIM",
+				"CUSTOMERSTAGE, CUSTOMERDIM join(1 == 1,",
+				"     joinType:'cross',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 aggregate(groupBy(MAXCUSTSK,",
+				"          CUSTOMERID,",
+				"          CUSTOMERNAME),",
+				"     Counts = count(CUSTOMERID)) ~> aggregate1"
 			]
 		}
 	}
