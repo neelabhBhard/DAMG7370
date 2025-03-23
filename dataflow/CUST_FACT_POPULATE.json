@@ -10,6 +10,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "CUSTSTG"
+				},
+				{
+					"dataset": {
+						"referenceName": "IMPORTINGCUSTDIM",
+						"type": "DatasetReference"
+					},
+					"name": "CUSTDIM"
 				}
 			],
 			"sinks": [],
@@ -22,7 +29,17 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> CUSTSTG"
+				"     format: 'table') ~> CUSTSTG",
+				"source(output(",
+				"          CUSTOMER_SK as decimal(38,0),",
+				"          CUSTOMER_ID as string,",
+				"          CUSTOMER_NAME as string,",
+				"          DI_CREATEDDT as date,",
+				"          PID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> CUSTDIM"
 			]
 		}
 	}
