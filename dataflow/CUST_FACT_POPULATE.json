@@ -81,7 +81,6 @@
 				"          DI_CREATEDDT = currentDate()) ~> derivedColumn1",
 				"derivedColumn1 aggregate(groupBy(INVOICE_SK,",
 				"          INVOICEID,",
-				"          CUSTOMER_ID,",
 				"          CUSTOMERID,",
 				"          INVOICEDATE,",
 				"          TOTALPRODUCTCOUNT,",
@@ -110,14 +109,14 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     stageInsert: true,",
 				"     mapColumn(",
-				"          CUSTOMER_ID,",
 				"          INVOICE_SK,",
 				"          INVOICE_ID = INVOICEID,",
+				"          CUSTOMER_ID = CUSTOMERID,",
 				"          INVOICE_DT = INVOICEDATE,",
 				"          TOTAL_PRODUCT_CNT = TOTALPRODUCTCOUNT,",
 				"          TOTAL_PRODUCT_COST = TOTAL,",
-				"          PID,",
-				"          DI_CREATEDDT",
+				"          DI_CREATEDDT,",
+				"          PID",
 				"     )) ~> sink2"
 			]
 		}
