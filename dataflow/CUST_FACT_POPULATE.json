@@ -9,7 +9,7 @@
 						"referenceName": "SALESSTAGE",
 						"type": "DatasetReference"
 					},
-					"name": "CUSTSTG"
+					"name": "SALESSTG"
 				},
 				{
 					"dataset": {
@@ -27,7 +27,14 @@
 				}
 			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "Leftjoin"
+				},
+				{
+					"name": "join1"
+				}
+			],
 			"scriptLines": [
 				"source(output(",
 				"          INVOICEID as string,",
@@ -43,7 +50,7 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> CUSTSTG",
+				"     format: 'table') ~> SALESSTG",
 				"source(output(",
 				"          CUSTOMER_SK as decimal(38,0),",
 				"          CUSTOMER_ID as string,",
@@ -57,7 +64,17 @@
 				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     query: 'SELECT NVL(MAX(invoice_sk),0) as MaxinvoiceSK FROM TEMP_SCHEMA.fct_invoice',",
-				"     format: 'query') ~> FACTINVOICE"
+				"     format: 'query') ~> FACTINVOICE",
+				"SALESSTG, CUSTDIM join(CUSTOMERID == CUSTOMER_ID,",
+				"     joinType:'left',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> Leftjoin",
+				"Leftjoin, FACTINVOICE join(1 == 1,",
+				"     joinType:'cross',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1"
 			]
 		}
 	}
