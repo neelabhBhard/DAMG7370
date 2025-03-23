@@ -23,7 +23,7 @@
 						"referenceName": "FACTPOPULATEINVOICE",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "FACTINVOICE"
 				}
 			],
 			"sinks": [],
@@ -47,19 +47,10 @@
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     format: 'table') ~> CUSTDIM",
-				"source(output(",
-				"          INVOICE_SK as decimal(38,0),",
-				"          INVOICE_ID as string,",
-				"          CUSTOMER_ID as string,",
-				"          INVOICE_DT as date,",
-				"          TOTAL_PRODUCT_CNT as decimal(38,0),",
-				"          TOTAL_PRODUCT_COST as decimal(10,4),",
-				"          DI_CREATEDDT as date,",
-				"          PID as string",
-				"     ),",
-				"     allowSchemaDrift: true,",
+				"source(allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> source1"
+				"     query: 'SELECT NVL(MAX(invoice_sk),0) as MaxinvoiceSK FROM TEMP_SCHEMA.fct_invoice',",
+				"     format: 'query') ~> FACTINVOICE"
 			]
 		}
 	}
