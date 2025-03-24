@@ -17,6 +17,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "FACTINVOICE"
+				},
+				{
+					"dataset": {
+						"referenceName": "IMPORTINGORPHAN",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
 				}
 			],
 			"sinks": [
@@ -68,6 +75,19 @@
 				"     validateSchema: false,",
 				"     query: 'SELECT NVL(MAX(invoice_sk),0) as MaxinvoiceSK FROM TEMP_SCHEMA.fct_invoice',",
 				"     format: 'query') ~> FACTINVOICE",
+				"source(output(",
+				"          INVOICE_SK as decimal(38,0),",
+				"          INVOICE_ID as string,",
+				"          CUSTOMER_SK as string,",
+				"          INVOICE_DT as date,",
+				"          TOTAL_PRODUCT_CNT as decimal(38,0),",
+				"          TOTAL_PRODUCT_COST as decimal(10,4),",
+				"          DI_CREATEDDT as date,",
+				"          PID as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     format: 'table') ~> source1",
 				"SALESSTG, FACTINVOICE join(1 == 1,",
 				"     joinType:'cross',",
 				"     matchType:'exact',",
