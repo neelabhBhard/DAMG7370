@@ -45,7 +45,7 @@
 					"name": "split1"
 				},
 				{
-					"name": "select1"
+					"name": "surrogateKey1"
 				}
 			],
 			"scriptLines": [
@@ -105,35 +105,11 @@
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
-				"join1 split(!isNull(CUSTOMERID),",
+				"join1 split(!isNull(CUSTOMER_ID),",
 				"     disjoint: false) ~> split1@(VALID, ORPHAN)",
-				"split1@VALID select(mapColumn(",
-				"          INVOICEID,",
-				"          CUSTOMERID,",
-				"          INVOICEDATE,",
-				"          SHIPTO,",
-				"          SHIPTOCITY,",
-				"          SHIPTOCOUNTRY,",
-				"          SALESPERSONID,",
-				"          SALESPERSONNAME,",
-				"          TOTALPRODUCTCOUNT,",
-				"          TOTAL,",
-				"          INVOICE_SK,",
-				"          INVOICE_ID,",
-				"          CUSTOMER_SK1,",
-				"          INVOICE_DT,",
-				"          TOTAL_PRODUCT_CNT,",
-				"          TOTAL_PRODUCT_COST,",
-				"          DI_CREATEDDT = split1@VALID@DI_CREATEDDT,",
-				"          PID = split1@VALID@PID,",
-				"          CUSTOMER_SK,",
-				"          CUSTOMER_ID,",
-				"          CUSTOMER_NAME,",
-				"          DI_CREATEDDT = split1@VALID@DI_CREATEDDT,",
-				"          PID = split1@VALID@PID",
-				"     ),",
-				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> select1"
+				"split1@VALID keyGenerate(output(Rownum as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1"
 			]
 		}
 	}
