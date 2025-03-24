@@ -39,7 +39,7 @@
 						"referenceName": "SnowflakeTable8",
 						"type": "DatasetReference"
 					},
-					"name": "sink1"
+					"name": "ORPHANSINK"
 				}
 			],
 			"transformations": [
@@ -50,7 +50,19 @@
 					"name": "join1"
 				},
 				{
-					"name": "split1"
+					"name": "VALIDSINK"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "join2"
+				},
+				{
+					"name": "derivedColumn1"
+				},
+				{
+					"name": "surrogateKey1"
 				}
 			],
 			"scriptLines": [
@@ -109,8 +121,28 @@
 				"     ignoreSpaces: false,",
 				"     broadcast: 'auto')~> join1",
 				"join1 split(isNull(CUSTOMER_ID),",
-				"     disjoint: false) ~> split1@(ORPHAN, VALID)",
-				"split1@ORPHAN sink(allowSchemaDrift: true,",
+				"     disjoint: false) ~> VALIDSINK@(ORPHAN, VALID)",
+				"VALIDSINK@VALID select(mapColumn(",
+				"          INVOICEID,",
+				"          INVOICEDATE,",
+				"          TOTAL,",
+				"          TOTAL_PRODUCT_CNT = TOTALPRODUCTCOUNT,",
+				"          CUSTOMER_SK = VALIDSINK@VALID@CUSTOMER_SK",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1, FACTINVOICE join(1 == 1,",
+				"     joinType:'cross',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join2",
+				"surrogateKey1 derive(INVOICE_SK = MAXINVOICESK + ROWNUM,",
+				"          DI_CreatedDT = currentDate(),",
+				"          PID = $PID) ~> derivedColumn1",
+				"join2 keyGenerate(output(ROWNUM as long),",
+				"     startAt: 1L,",
+				"     stepValue: 1L) ~> surrogateKey1",
+				"VALIDSINK@ORPHAN sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          INVOICE_SK as decimal(38,0),",
@@ -126,6 +158,7 @@
 				"     insertable:true,",
 				"     updateable:false,",
 				"     upsertable:false,",
+				"     truncate:true,",
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
@@ -133,13 +166,13 @@
 				"     mapColumn(",
 				"          INVOICE_SK,",
 				"          INVOICE_ID,",
-				"          CUSTOMER_SK = split1@ORPHAN@CUSTOMER_SK,",
+				"          CUSTOMER_SK = VALIDSINK@ORPHAN@CUSTOMER_SK,",
 				"          INVOICE_DT,",
 				"          TOTAL_PRODUCT_CNT,",
 				"          TOTAL_PRODUCT_COST,",
-				"          DI_CREATEDDT = split1@ORPHAN@DI_CREATEDDT,",
-				"          PID = split1@ORPHAN@PID",
-				"     )) ~> sink1"
+				"          DI_CREATEDDT = VALIDSINK@ORPHAN@DI_CREATEDDT,",
+				"          PID = VALIDSINK@ORPHAN@PID",
+				"     )) ~> ORPHANSINK"
 			]
 		}
 	}
