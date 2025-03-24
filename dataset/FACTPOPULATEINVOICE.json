@@ -19,7 +19,7 @@
 				"type": "VARCHAR"
 			},
 			{
-				"name": "CUSTOMER_ID",
+				"name": "CUSTOMER_SK",
 				"type": "VARCHAR"
 			},
 			{
