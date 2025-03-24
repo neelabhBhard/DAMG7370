@@ -19,7 +19,7 @@
 				"type": "VARCHAR"
 			},
 			{
-				"name": "CUSTOMER_SK",
+				"name": "CUSTOMER_SK1",
 				"type": "NUMBER",
 				"precision": 38,
 				"scale": 0
