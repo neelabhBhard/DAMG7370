@@ -136,7 +136,9 @@
 				"          CUSTOMER_SK = split1@ORPHAN@CUSTOMER_SK,",
 				"          INVOICE_DT,",
 				"          TOTAL_PRODUCT_CNT,",
-				"          TOTAL_PRODUCT_COST",
+				"          TOTAL_PRODUCT_COST,",
+				"          DI_CREATEDDT = split1@ORPHAN@DI_CREATEDDT,",
+				"          PID = split1@ORPHAN@PID",
 				"     )) ~> sink1"
 			]
 		}
