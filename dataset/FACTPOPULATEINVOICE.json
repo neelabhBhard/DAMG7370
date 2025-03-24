@@ -20,7 +20,9 @@
 			},
 			{
 				"name": "CUSTOMER_SK",
-				"type": "VARCHAR"
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
 			},
 			{
 				"name": "INVOICE_DT",

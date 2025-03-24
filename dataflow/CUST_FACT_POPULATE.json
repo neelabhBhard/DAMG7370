@@ -185,7 +185,7 @@
 				"     input(",
 				"          INVOICE_SK as decimal(38,0),",
 				"          INVOICE_ID as string,",
-				"          CUSTOMER_SK as string,",
+				"          CUSTOMER_SK as decimal(38,0),",
 				"          INVOICE_DT as date,",
 				"          TOTAL_PRODUCT_CNT as decimal(38,0),",
 				"          TOTAL_PRODUCT_COST as decimal(10,4),",
@@ -199,7 +199,15 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     stageInsert: true) ~> sink1"
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          INVOICE_SK,",
+				"          INVOICE_ID = INVOICEID,",
+				"          CUSTOMER_SK,",
+				"          TOTAL_PRODUCT_CNT,",
+				"          DI_CREATEDDT = DI_CreatedDT,",
+				"          PID",
+				"     )) ~> sink1"
 			]
 		}
 	}
