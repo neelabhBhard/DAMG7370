@@ -16,13 +16,10 @@
 				"userProperties": [],
 				"typeProperties": {
 					"dataflow": {
-						"referenceName": "CUST_DIM_LOADING",
+						"referenceName": "LOADINGDIM_2",
 						"type": "DataFlowReference",
 						"parameters": {
-							"PID": {
-								"value": "'@{pipeline().RunId}'",
-								"type": "Expression"
-							}
+							"PID": "\"59\""
 						}
 					},
 					"compute": {

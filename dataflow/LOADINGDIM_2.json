@@ -43,8 +43,11 @@
 				}
 			],
 			"scriptLines": [
+				"parameters{",
+				"     PID as string (\"59\")",
+				"}",
 				"source(output(",
-				"          customerid as short,",
+				"          customerid as string,",
 				"          CustomerName as string,",
 				"          billTo as string",
 				"     ),",
@@ -70,7 +73,9 @@
 				"aggregate1 keyGenerate(output(ROWNUM as long),",
 				"     startAt: 1L,",
 				"     stepValue: 1L) ~> surrogateKey1",
-				"surrogateKey1 derive(CUSTOMER_SK = MAXCUSTSK +ROWNUM) ~> derivedColumn1",
+				"surrogateKey1 derive(CUSTOMER_SK = MAXCUSTSK +ROWNUM,",
+				"          DI_CreatedDt = currentDate(),",
+				"          PID = $PID) ~> derivedColumn1",
 				"derivedColumn1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
@@ -89,12 +94,11 @@
 				"     skipDuplicateMapOutputs: true,",
 				"     stageInsert: true,",
 				"     mapColumn(",
-				"          MAXCUSTSK,",
-				"          customerid,",
-				"          CustomerName,",
-				"          Count,",
-				"          ROWNUM,",
-				"          CUSTOMER_SK",
+				"          CUSTOMER_SK,",
+				"          CUSTOMER_ID = customerid,",
+				"          CUSTOMER_NAME = CustomerName,",
+				"          DI_CREATEDDT = DI_CreatedDt,",
+				"          PID",
 				"     )) ~> sink1"
 			]
 		}
