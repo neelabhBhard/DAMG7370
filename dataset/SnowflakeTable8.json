@@ -2,15 +2,54 @@
 	"name": "SnowflakeTable8",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "LOCATION_DIM",
+			"referenceName": "Snowflake8",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "SnowflakeV2Table",
-		"schema": [],
+		"schema": [
+			{
+				"name": "INVOICE_SK",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "INVOICE_ID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "CUSTOMER_SK",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "INVOICE_DT",
+				"type": "DATE"
+			},
+			{
+				"name": "TOTAL_PRODUCT_CNT",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
+			},
+			{
+				"name": "TOTAL_PRODUCT_COST",
+				"type": "NUMBER",
+				"precision": 10,
+				"scale": 4
+			},
+			{
+				"name": "DI_CREATEDDT",
+				"type": "DATE"
+			},
+			{
+				"name": "PID",
+				"type": "VARCHAR"
+			}
+		],
 		"typeProperties": {
 			"schema": "TEMP_SCHEMA",
-			"table": "LOCATION_DIM"
+			"table": "ORPHAN_INVOICE"
 		}
 	}
 }
