@@ -166,7 +166,7 @@
 				"          INVOICE_DT = INVOICEDATE,",
 				"          TOTAL_PRODUCT_CNT = TOTALPRODUCTCOUNT,",
 				"          TOTAL_PRODUCT_COST = TOTAL,",
-				"          DI_CREATEDDT = derivedColumn1@DI_CreatedDt,",
+				"          DI_CREATEDDT = split1@VALID@DI_CREATEDDT,",
 				"          PID",
 				"     )) ~> sink1",
 				"split1@ORPHAN sink(allowSchemaDrift: true,",
