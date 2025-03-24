@@ -2,15 +2,28 @@
 	"name": "STAGINGCUSTOMER",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "Snowflake5",
+			"referenceName": "CUSTSTG2",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "SnowflakeV2Table",
-		"schema": [],
+		"schema": [
+			{
+				"name": "CUSTOMERID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "CUSTOMERNAME",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "BILLTO",
+				"type": "VARCHAR"
+			}
+		],
 		"typeProperties": {
 			"schema": "TEMP_SCHEMA",
-			"table": "CUSTOMER_STG"
+			"table": "CUSTOMER_STG2"
 		}
 	}
 }
