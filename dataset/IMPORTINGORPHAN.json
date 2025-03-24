@@ -9,44 +9,48 @@
 		"type": "SnowflakeV2Table",
 		"schema": [
 			{
-				"name": "INVOICE_SK",
-				"type": "NUMBER",
-				"precision": 38,
-				"scale": 0
-			},
-			{
-				"name": "INVOICE_ID",
+				"name": "INVOICEID",
 				"type": "VARCHAR"
 			},
 			{
-				"name": "CUSTOMER_SK1",
-				"type": "NUMBER",
-				"precision": 38,
-				"scale": 0
+				"name": "CUSTOMERID",
+				"type": "VARCHAR"
 			},
 			{
-				"name": "INVOICE_DT",
+				"name": "INVOICEDATE",
 				"type": "DATE"
 			},
 			{
-				"name": "TOTAL_PRODUCT_CNT",
-				"type": "NUMBER",
-				"precision": 38,
-				"scale": 0
+				"name": "SHIPTO",
+				"type": "VARCHAR"
 			},
 			{
-				"name": "TOTAL_PRODUCT_COST",
+				"name": "SHIPTOCITY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SHIPTOCOUNTRY",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SALESPERSONID",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "SALESPERSONNAME",
+				"type": "VARCHAR"
+			},
+			{
+				"name": "TOTALPRODUCTCOUNT",
 				"type": "NUMBER",
 				"precision": 10,
 				"scale": 4
 			},
 			{
-				"name": "DI_CREATEDDT",
-				"type": "DATE"
-			},
-			{
-				"name": "PID",
-				"type": "VARCHAR"
+				"name": "TOTAL",
+				"type": "NUMBER",
+				"precision": 38,
+				"scale": 0
 			}
 		],
 		"typeProperties": {
