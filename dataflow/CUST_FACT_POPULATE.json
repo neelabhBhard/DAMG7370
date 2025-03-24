@@ -115,7 +115,7 @@
 				"     input(",
 				"          INVOICE_SK as decimal(38,0),",
 				"          INVOICE_ID as string,",
-				"          CUSTOMER_SK as string,",
+				"          CUSTOMER_SK as decimal(38,0),",
 				"          INVOICE_DT as date,",
 				"          TOTAL_PRODUCT_CNT as decimal(38,0),",
 				"          TOTAL_PRODUCT_COST as decimal(10,4),",
