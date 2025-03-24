@@ -40,6 +40,13 @@
 						"type": "DatasetReference"
 					},
 					"name": "sink1"
+				},
+				{
+					"dataset": {
+						"referenceName": "IMPORTINGORPHAN",
+						"type": "DatasetReference"
+					},
+					"name": "sink2"
 				}
 			],
 			"transformations": [
@@ -151,7 +158,39 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     stageInsert: true) ~> sink1"
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          INVOICE_SK,",
+				"          INVOICE_ID = INVOICEID,",
+				"          CUSTOMER_SK,",
+				"          INVOICE_DT = INVOICEDATE,",
+				"          TOTAL_PRODUCT_CNT = TOTALPRODUCTCOUNT,",
+				"          TOTAL_PRODUCT_COST = TOTAL,",
+				"          DI_CREATEDDT = derivedColumn1@DI_CreatedDt,",
+				"          PID",
+				"     )) ~> sink1",
+				"split1@ORPHAN sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          INVOICEID as string,",
+				"          CUSTOMERID as string,",
+				"          INVOICEDATE as date,",
+				"          SHIPTO as string,",
+				"          SHIPTOCITY as string,",
+				"          SHIPTOCOUNTRY as string,",
+				"          SALESPERSONID as string,",
+				"          SALESPERSONNAME as string,",
+				"          TOTALPRODUCTCOUNT as decimal(10,4),",
+				"          TOTAL as decimal(38,0)",
+				"     ),",
+				"     deletable:false,",
+				"     insertable:true,",
+				"     updateable:false,",
+				"     upsertable:false,",
+				"     format: 'table',",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     stageInsert: true) ~> sink2"
 			]
 		}
 	}
