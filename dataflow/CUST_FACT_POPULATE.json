@@ -190,7 +190,19 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     stageInsert: true) ~> sink2"
+				"     stageInsert: true,",
+				"     mapColumn(",
+				"          INVOICEID,",
+				"          CUSTOMERID,",
+				"          INVOICEDATE,",
+				"          SHIPTO,",
+				"          SHIPTOCITY,",
+				"          SHIPTOCOUNTRY,",
+				"          SALESPERSONID,",
+				"          SALESPERSONNAME,",
+				"          TOTALPRODUCTCOUNT,",
+				"          TOTAL",
+				"     )) ~> sink2"
 			]
 		}
 	}
