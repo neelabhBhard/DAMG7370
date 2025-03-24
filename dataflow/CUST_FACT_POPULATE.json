@@ -30,7 +30,7 @@
 						"referenceName": "IMPORTINGCUSTDIM",
 						"type": "DatasetReference"
 					},
-					"name": "source1"
+					"name": "CUSTDIM"
 				}
 			],
 			"sinks": [],
@@ -40,6 +40,9 @@
 				},
 				{
 					"name": "join1"
+				},
+				{
+					"name": "split1"
 				}
 			],
 			"scriptLines": [
@@ -90,13 +93,15 @@
 				"     ),",
 				"     allowSchemaDrift: true,",
 				"     validateSchema: false,",
-				"     format: 'table') ~> source1",
+				"     format: 'table') ~> CUSTDIM",
 				"SALESSTG, ORPHAN union(byName: true)~> MERGE",
-				"MERGE join(ERROR_FUNCTION('') == ERROR_FUNCTION(''),",
-				"     joinType:'inner',",
+				"MERGE, CUSTDIM join(CUSTOMERID == CUSTOMER_ID,",
+				"     joinType:'left',",
 				"     matchType:'exact',",
 				"     ignoreSpaces: false,",
-				"     broadcast: 'auto')~> join1"
+				"     broadcast: 'auto')~> join1",
+				"join1 split(isNull(CUSTOMER_ID),",
+				"     disjoint: false) ~> split1@(ORPHAN, VALID)"
 			]
 		}
 	}
